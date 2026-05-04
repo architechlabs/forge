@@ -1,0 +1,18 @@
+configuration:
+  log_level:
+    name: Log level
+    description: Runtime verbosity for the add-on.
+  poll_interval:
+    name: Poll interval
+    description: Seconds between background sync passes.
+  allow_config_writes:
+    name: Allow configuration writes
+    description: Permit managed package creation in the Home Assistant configuration folder.
+  package_name:
+    name: Package name
+    description: File name used for the generated Home Assistant package.
+  max_entities_per_import:
+    name: Maximum import size
+    description: Maximum number of entities that can be imported in one operation.
+network:
+  8099/TCP: Web UI

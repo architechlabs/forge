@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Instance Entity Bridge</title>
+    <link rel="stylesheet" href="./static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <h1>Entity Bridge</h1>
+          <p id="summary">Loading</p>
+        </div>
+        <div class="actions">
+          <button id="refreshBtn" class="icon-button" title="Refresh" aria-label="Refresh">R</button>
+          <button id="scanAllBtn">Scan All</button>
+          <button id="syncBtn">Sync</button>
+        </div>
+      </header>
+
+      <nav class="tabs" aria-label="Views">
+        <button class="tab active" data-view="sources">Sources</button>
+        <button class="tab" data-view="discover">Discover</button>
+        <button class="tab" data-view="imports">Imports</button>
+        <button class="tab" data-view="events">Events</button>
+      </nav>
+
+      <section id="sources" class="view active">
+        <div class="layout-two">
+          <form id="instanceForm" class="panel">
+            <h2>Source Instance</h2>
+            <input type="hidden" id="instanceId" />
+            <label>
+              Name
+              <input id="instanceName" required maxlength="80" placeholder="Upstairs HA" />
+            </label>
+            <label>
+              URL
+              <input id="instanceUrl" required placeholder="https://homeassistant.local:8123" />
+            </label>
+            <label>
+              Long-lived token
+              <input id="instanceToken" type="password" autocomplete="off" placeholder="Token" />
+            </label>
+            <div class="row">
+              <label class="check"><input id="instanceSsl" type="checkbox" checked /> Verify SSL</label>
+              <label class="check"><input id="instanceEnabled" type="checkbox" checked /> Enabled</label>
+              <label class="check"><input id="instanceSync" type="checkbox" checked /> Sync</label>
+            </div>
+            <div class="form-actions">
+              <button type="submit">Save</button>
+              <button type="button" id="clearFormBtn" class="secondary">Clear</button>
+            </div>
+          </form>
+
+          <section class="panel">
+            <h2>Instances</h2>
+            <div id="instancesList" class="stack"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="discover" class="view">
+        <section class="panel toolbar-panel">
+          <div class="toolbar">
+            <label>
+              Source
+              <select id="planInstance"></select>
+            </label>
+            <label>
+              Filter
+              <input id="entityFilter" placeholder="light, knx, kitchen" />
+            </label>
+            <label>
+              Prefix
+              <input id="planPrefix" value="bridge" maxlength="32" />
+            </label>
+            <label>
+              Conflict
+              <select id="conflictPolicy">
+                <option value="rename">Rename</option>
+                <option value="skip">Skip</option>
+              </select>
+            </label>
+            <button id="scanSelectedBtn">Scan</button>
+            <button id="buildPlanBtn">Plan</button>
+            <button id="importBtn">Import Selected</button>
+          </div>
+        </section>
+
+        <section class="requirements" id="requirements"></section>
+
+        <section class="panel">
+          <div class="table-head">
+            <h2>Discovered Entities</h2>
+            <span id="selectedCount">0 selected</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th><input id="selectAll" type="checkbox" aria-label="Select all" /></th>
+                  <th>Entity</th>
+                  <th>State</th>
+                  <th>Integration</th>
+                  <th>Local Entity</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="entitiesBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section id="imports" class="view">
+        <section class="panel">
+          <div class="table-head">
+            <h2>Imported Entities</h2>
+            <span id="importCount">0</span>
+          </div>
+          <div id="importsList" class="import-grid"></div>
+        </section>
+      </section>
+
+      <section id="events" class="view">
+        <section class="panel">
+          <h2>Activity</h2>
+          <div id="eventsList" class="stack"></div>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./static/app.js"></script>
+  </body>
+</html>

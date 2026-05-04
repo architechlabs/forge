@@ -1,0 +1,49 @@
+name: "Instance Entity Bridge"
+version: "0.1.0"
+slug: instance_entity_bridge
+description: >-
+  Discover entities from other Home Assistant instances, explain native
+  integration requirements, and create managed local proxy entities.
+url: "https://www.home-assistant.io/"
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+startup: application
+boot: auto
+init: false
+ingress: true
+ingress_port: 8099
+ingress_entry: /
+panel_icon: mdi:transit-connection-variant
+panel_title: Entity Bridge
+panel_admin: true
+homeassistant_api: true
+hassio_api: true
+hassio_role: homeassistant
+map:
+  - type: homeassistant_config
+    read_only: false
+    path: /homeassistant
+  - type: addon_config
+    read_only: false
+    path: /config
+ports:
+  8099/tcp: null
+ports_description:
+  8099/tcp: Web UI, normally accessed through Home Assistant Ingress
+options:
+  log_level: info
+  poll_interval: 15
+  allow_config_writes: true
+  package_name: entity_bridge
+  max_entities_per_import: 500
+schema:
+  log_level: "list(trace|debug|info|notice|warning|error|fatal)"
+  poll_interval: "int(5,3600)"
+  allow_config_writes: bool
+  package_name: "match(^[a-zA-Z0-9_-]+$)"
+  max_entities_per_import: "int(1,5000)"
+watchdog: "http://[HOST]:[PORT:8099]/health"
