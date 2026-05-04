@@ -11,7 +11,7 @@ def utc_now() -> str:
 
 class JsonStore:
     def __init__(self, data_path: Path) -> None:
-        self.path = data_path / "entity_bridge_store.json"
+        self.path = data_path / "forge_store.json"
         self.data: dict[str, Any] = {
             "instances": [],
             "entity_maps": [],

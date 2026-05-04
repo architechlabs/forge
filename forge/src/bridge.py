@@ -385,7 +385,7 @@ def render_package(entity_maps: list[dict[str, Any]]) -> str:
         domain = mapping["local_domain"]
         sections.setdefault(domain, {})[mapping["object_id"]] = _helper_config(mapping)
     header = [
-        "# Managed by the Instance Entity Bridge add-on.",
+        "# Managed by the Forge add-on.",
         "# Edit imports in the add-on UI; manual changes can be overwritten.",
         "",
     ]

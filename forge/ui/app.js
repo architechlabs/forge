@@ -300,7 +300,7 @@ async function buildPlan() {
     body: JSON.stringify({
       instance_ids: instanceIds,
       entity_refs: selected.length ? selected : null,
-      prefix: $("planPrefix").value || "bridge",
+      prefix: $("planPrefix").value || "forge",
       conflict_policy: $("conflictPolicy").value,
     }),
   });
@@ -328,7 +328,7 @@ async function importSelected() {
     body: JSON.stringify({
       instance_ids: instanceIds,
       entity_refs: selected,
-      prefix: $("planPrefix").value || "bridge",
+      prefix: $("planPrefix").value || "forge",
       conflict_policy: $("conflictPolicy").value,
     }),
   });

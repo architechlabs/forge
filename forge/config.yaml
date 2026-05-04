@@ -1,44 +1,40 @@
-name: "Instance Entity Bridge"
+name: "Forge"
 version: "0.1.0"
-slug: instance_entity_bridge
+slug: "forge"
 description: >-
-  Discover entities from other Home Assistant instances, explain native
-  integration requirements, and create managed local proxy entities.
-url: "https://www.home-assistant.io/"
+  Copy, merge, mirror, and control entities from multiple Home Assistant
+  instances with integration-aware planning and managed local helper entities.
+url: "https://github.com/architechlabs/Forge"
 arch:
-  - aarch64
   - amd64
-  - armhf
   - armv7
-  - i386
-startup: application
+  - aarch64
+startup: services
 boot: auto
 init: false
 ingress: true
 ingress_port: 8099
 ingress_entry: /
-panel_icon: mdi:transit-connection-variant
-panel_title: Entity Bridge
+panel_icon: mdi:anvil
+panel_title: Forge
 panel_admin: true
 homeassistant_api: true
+auth_api: true
 hassio_api: true
 hassio_role: homeassistant
 map:
-  - type: homeassistant_config
-    read_only: false
-    path: /homeassistant
-  - type: addon_config
-    read_only: false
-    path: /config
+  - config:rw
+environment:
+  PORT: "8099"
 ports:
   8099/tcp: null
 ports_description:
-  8099/tcp: Web UI, normally accessed through Home Assistant Ingress
+  8099/tcp: "Forge API and web interface (Ingress preferred)"
 options:
   log_level: info
   poll_interval: 15
   allow_config_writes: true
-  package_name: entity_bridge
+  package_name: forge
   max_entities_per_import: 500
 schema:
   log_level: "list(trace|debug|info|notice|warning|error|fatal)"

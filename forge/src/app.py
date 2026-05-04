@@ -51,13 +51,13 @@ class PlanPayload(BaseModel):
     instance_ids: list[str] = Field(min_length=1)
     entity_ids: list[str] | None = None
     entity_refs: list[str] | None = None
-    prefix: str = "bridge"
+    prefix: str = "forge"
     conflict_policy: Literal["rename", "skip"] = "rename"
 
     @field_validator("prefix")
     @classmethod
     def prefix_is_short_slug(cls, value: str) -> str:
-        cleaned = value.strip() or "bridge"
+        cleaned = value.strip() or "forge"
         if len(cleaned) > 32:
             raise ValueError("Prefix must be 32 characters or fewer")
         return cleaned
@@ -231,7 +231,7 @@ async def lifespan(_: FastAPI):
         sync_task.cancel()
 
 
-app = FastAPI(title="Instance Entity Bridge", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="Forge", version="0.1.0", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
