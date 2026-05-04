@@ -1,5 +1,5 @@
 name: "Forge"
-version: "0.1.0"
+version: "0.1.5"
 slug: "forge"
 description: >-
   Copy, merge, mirror, and control entities from multiple Home Assistant
@@ -14,7 +14,6 @@ boot: auto
 init: false
 ingress: true
 ingress_port: 8099
-ingress_entry: /
 panel_icon: mdi:anvil
 panel_title: Forge
 panel_admin: true

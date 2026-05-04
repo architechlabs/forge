@@ -4,6 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Forge</title>
+    <script>
+      if (!location.pathname.endsWith("/")) {
+        const base = document.createElement("base");
+        base.href = `${location.pathname}/`;
+        document.head.prepend(base);
+      }
+    </script>
     <link rel="stylesheet" href="./static/styles.css" />
   </head>
   <body>

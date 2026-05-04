@@ -240,10 +240,23 @@ app.add_middleware(
     allow_headers=["*"],
 )
 UI_PATH = Path(__file__).resolve().parents[1] / "ui"
+
+
+@app.middleware("http")
+async def normalize_ingress_slashes(request, call_next):
+    path = request.scope.get("path", "")
+    if "//" in path:
+        while "//" in path:
+            path = path.replace("//", "/")
+        request.scope["path"] = path or "/"
+    return await call_next(request)
+
+
 app.mount("/static", StaticFiles(directory=str(UI_PATH)), name="static")
 
 
 @app.get("/")
+@app.get("//")
 async def index() -> FileResponse:
     return FileResponse(str(UI_PATH / "index.html"))
 
